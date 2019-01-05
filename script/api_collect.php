@@ -1,7 +1,6 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: chengwanding@zuoyebang.com
  * Date: 2018/12/7
  * Time: 21:20
  */

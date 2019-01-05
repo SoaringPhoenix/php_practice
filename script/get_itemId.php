@@ -1,7 +1,6 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: chengwanding@zuoyebang.com
  * Date: 2018/12/7
  * Time: 12:40
  */
@@ -29,7 +28,6 @@ class get_itemId extends Hk_Common_BaseDao {
             $product[$key] = $item;
         }
         var_dump($product);
-        Bd_Log::warning("------------chengwanding------------".var_export($product, true));
         return $ret;
     }
 }
