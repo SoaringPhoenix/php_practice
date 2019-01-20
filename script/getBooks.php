@@ -7,6 +7,8 @@
  */
 Bd_Init::init('macan');
 class getBooks extends Hk_Common_BaseMultiDao {
+    const SOURCE = 'script';
+    const OPCODE = 88;
     public function __construct() {
         $this->_dbName = 'zybmacan/zybmacan';
         $this->_table = 'tblBookRecord';
@@ -18,12 +20,21 @@ class getBooks extends Hk_Common_BaseMultiDao {
 
     public function execute($uid) {
         $total = $this->total();
-        $arrTotal = [];
         $exists = $this->exists($uid);
+        $arrTotal = [];
+        $arrExists = [];
+        $subject = [];
         foreach ($total as $key => $value) {
+            $arrTotal[$key] = $value['bookId'];
+            $subject[$arrTotal[$key]] = $value['subjectId'];
         }
-        $need = array_diff($total, $exists);
-        var_export($need);
+        foreach ($exists as $key => $value) {
+            $arrExists[$key] = $value['bookId'];
+        }
+        $need = array_diff($arrTotal, $arrExists);
+        foreach ($need as $key => $value) {
+            $this->fillUp($uid, $subject[$value], $value);
+        }
     }
 
     public function exists($uid) {
@@ -39,12 +50,33 @@ class getBooks extends Hk_Common_BaseMultiDao {
 
     public function total() {
         $table = "tblSubjectBook";
-        $sql = "SELECT bookId FROM $table;";
+        $fields = "bookId, subjectId";
+        $sql = "SELECT $fields FROM $table;";
         $ret = $this->query($sql);
-        var_dump($ret);
+        return $ret;
+    }
+
+    public function fillUp($uid, $subjectId, $bookId) {
+        $arrFields = [
+            'uid' => $uid,
+            'subjectId' => $subjectId,
+            'bookId' => $bookId,
+            'cost' => 0,
+            'source' => self::SOURCE,
+            'opCode' => self::OPCODE,
+            'status' => 1,
+            'finishedAt' => time(),
+            'createdAt' => time(),
+            'updatedAt' => time(),
+        ];
+        $ret = $this->insertRecords($uid, $arrFields);
+        if ($ret == false) {
+            Bd_Log::warning("-------dcy------------".var_export($ret, true));
+        }
+        echo 'You have got all books successfully!'."\n";
         return $ret;
     }
 }
-$uid = $argv[1];
+$uid = !empty($argv[1]) ? $argv[1]: 2000017206;
 $obj = new getBooks();
 $obj->execute($uid);
