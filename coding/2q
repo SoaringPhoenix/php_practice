@@ -1,0 +1,6 @@
+<?php
+$content = $argv[1];
+$content = '[{"type":"bargainUnLimit","data":{"bargain":0}}]';
+$content = '{"type":"bargainUnLimit","data":{"bargain":1990}}';
+var_dump(json_decode($content['type']));
+#var_dump(json_encode($content['data']));
