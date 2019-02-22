@@ -9,16 +9,14 @@ class Solution {
 private $morse = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.",
     "--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."];
     function uniqueMorseRepresentations($words) {
-        $arr = [];
-        $count = [];
         foreach ($words as $index => $word) {
-            foreach (str_split($word) as $idx => $letter) {
-                $arr[$index][$idx] = $this->morse[ord($letter) - 97];
-                $count[$index]['dot'] += substr_count($arr[$index][$idx], '.');
-                $count[$index]['line'] += substr_count($arr[$index][$idx], '-');
+            $arr = str_split($word);
+            foreach ($arr as $idx => $letter) {
+                $arr[$idx] = $this->morse[ord($letter) - 97];
             }
+            $words[$index] = implode('', $arr);
         }
-        return count(array_unique($count));
+        return count(array_unique($words));
     }
 }
 $words = ["gin", "zen", "gig", "msg"];
