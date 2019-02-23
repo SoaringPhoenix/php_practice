@@ -8,18 +8,17 @@
 class Solution {
     function minDeletionSize($A) {
         $arr = [];
-        $count = 0;
         foreach ($A as $index => $elems) {
             foreach (str_split($A[$index]) as $idx => $elem) {
                 $arr[$idx][$index] = $elem;
                 if ($index > 0 && $arr[$idx][$index - 1] > $arr[$idx][$index]) {
-                    $count += 1;
+                    $arr[strlen($A[0]) + $idx] = 1;
                     continue;
                 }
             }
         }
-        return $count;
+        return count($arr) -  strlen($A[0]);
     }
 }
-$A = ["cba","daf","ghi"];
+$A = ["a","b"];
 var_export((new Solution())->minDeletionSize($A));
