@@ -36,13 +36,20 @@ class Solution {
                 break;
             }
         }
-        for ($j = $rowNum; $j >= 0; $j++) {
+        for ($j = $rowNum; $j >= 0; $j--) {
             if ($board[$j][$colNum] == 'p') {
                 $count += 1;
                 break;
             }
+            if ($board[$j][$colNum] == 'B') {
+                break;
+            }
         }
         for ($j = $rowNum; $j <= 7; $j++) {
+            if ($board[$j][$colNum] == 'p') {
+                $count += 1;
+                break;
+            }
             if ($board[$j][$colNum] == 'B') {
                 break;
             }

@@ -8,10 +8,20 @@
 class Solution {
     function diStringMatch($S) {
         $array = str_split($S);
-        $ret = [0];
+        $ret = [];
+        $start = 0;
+        $end = count($array);
         foreach ($array as $index => $arr) {
-            $array[$index] == 'I' ? $ret[$index + 1] = $ret[$index] + 1 : $ret[$index + 1] = $ret[$index] - 1;
+            if ($arr == 'D') {
+                $ret[$index] = $end;
+                $end -= 1;
+            }
+            else {
+                $ret[$index] = $start;
+                $start += 1;
+            }
         }
+        $ret[count($array)] = $array[count($array) -1] == 'D' ? $start : $end;
         return $ret;
     }
 }
