@@ -46,7 +46,7 @@ $payload = array(
     //"url" => "homework://live/live/knowledgehome",
     //"url" => "app://homework/skin/list",
    # "url" => "app://homework/push/link?to=sync_practice",
-   "url" => "https://www.zybang.com"
+   "url" => "https://www.zybang.com",
     "badge"    => 20,
     "ext"      => array(
         "sound"    => "",
