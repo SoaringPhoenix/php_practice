@@ -8,8 +8,18 @@
 class Solution {
     function commonChars($A) {
         $count = [];
-        foreach ($A as $word) {
+        $ret = [];
+        foreach ($A as $index => $word) {
+            $count[$index] = array_count_values(str_split($word));
+//            $count = array_merge($count, array_count_values(str_split($word)));
+
         }
+        foreach ($count as $index => $value) {
+                foreach ($count($index) as $idx => $times) {
+
+                }
+        }
+        return $count;
     }
 }
 $A = ["bella","label","roller"];
