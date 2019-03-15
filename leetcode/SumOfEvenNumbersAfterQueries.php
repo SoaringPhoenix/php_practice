@@ -28,7 +28,12 @@ class Solution {
                 }
             } else {
                 if (count($A) == 0) {$queries = [0];continue;}
-                $A[$index] += $query[0];
+                if (!($origin[$query[1]] & 1)) {
+                    $A[$query[1]] += $query[0];
+                }
+                else {
+                    $origin[$query[1]] += $query[0];
+                }
                 $queries[$index] = array_sum($A);
             }
         }
@@ -37,7 +42,7 @@ class Solution {
 }
 
 $A = [1, 2, 3, 4];
-$A = [3, 2];
+//$A = [3, 2];
 $queries = [[1, 0], [-3, 1], [-4, 0], [2, 3]];
-$queries = [[4, 0], [3, 0]];
+//$queries = [[4, 0], [3, 0]];
 var_export((new Solution())->sumEvenAfterQueries($A, $queries));
