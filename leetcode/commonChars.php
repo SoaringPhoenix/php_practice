@@ -7,20 +7,26 @@
  */
 class Solution {
     function commonChars($A) {
+        $len = count($A);
         $count = [];
-        $ret = [];
         foreach ($A as $index => $word) {
-            $count[$index] = array_count_values(str_split($word));
-//            $count = array_merge($count, array_count_values(str_split($word)));
-
-        }
-        foreach ($count as $index => $value) {
-                foreach ($count($index) as $idx => $times) {
-
-                }
+            foreach (str_split($word) as $idx => $letter) {
+                $count[$index][ord($letter) - 97]++;
+            }
         }
         return $count;
+        $ret = [];
+        for ($i = 0; $i < 26; $i++) {
+            $min = 100;
+            for ($j = 0; $j < $len; $j++) {
+                $min = min($min, $count[$j][$i]);
+            }
+            for ($j = 0; $j < $min; $j++) {
+                $ret[] = chr($i + 97);
+            }
+        }
+        return $ret;
     }
 }
-$A = ["bella","label","roller"];
+$A = ["cool","lock","cook"];
 var_export((new Solution())->commonChars($A));
