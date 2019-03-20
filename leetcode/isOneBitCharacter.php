@@ -7,10 +7,7 @@
  */
 class Solution {
     function isOneBitCharacter($bits) {
-        if (max($bits) == 0) {
-            return true;
-        }
-        return count($bits) & 1 && $bits[count($bits) - 1] == 0;
+
     }
 }
 $bits = [1, 1, 1, 0];
