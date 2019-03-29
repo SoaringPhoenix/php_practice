@@ -7,14 +7,15 @@
  */
 class Solution {
     function reverse($x) {
-        if ($x > 2 ^ 31 - 1 || $x < - (2 ^ 31) - 1) {
-            return 0;
-        }
         if ($x < 0) {
-            return intval(substr("-".strrev($x), 0, strlen($x)));
+            $ret = intval(substr("-".strrev($x), 0, strlen($x)));
         }
-        return intval(strrev($x));
+        else {
+            $ret =  intval(strrev($x));
+        }
+        ($ret > pow(2, 31) - 1 || $ret < -pow(2, 31)) && $ret = 0;
+        return $ret;
     }
 }
-$x = 120;
+$x = -2147483412;
 var_export((new Solution())->reverse($x));
